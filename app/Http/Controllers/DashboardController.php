@@ -6,23 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\publisher;
 
-class BookController extends Controller
+class DashboardController extends Controller
 {
     public static function index(){
-        return view('book.all', [
-            'publisher'=> publisher::all(),
-            'books' => Book::filter(request(['search', 'category']))->paginate(8)    
+        return view('dashboard.book.all', [
+            'publisher' => Publisher::all(),
+            'books' => Book::filter(request(['search', 'category']))->paginate(5)    
         ]);
     }
 
     public static function show(Book $book){
-        return view('book.detail', [
+        return view('dashboard.book.detail', [
             'book' => $book
         ]);
     }
 
     public static function create(){
-        return view('book.create', [
+        return view('dashboard.book.create', [
             'publisher' => publisher::all()
         ]);
     }
@@ -36,16 +36,16 @@ class BookController extends Controller
         ]);
 
         Book::create($validateData);
-        return redirect('/book/all')->with('succes', 'Book has been added');
+        return redirect('/dashboard/book/all')->with('succes', 'Book has been added');
     }
 
     public function destroy(Book $book){
         Book::destroy($book->id);
-        return redirect('/book/all')-> with('success', 'Data Berhasil Dihapus');
+        return redirect('/dashboard/book/all')-> with('success', 'Data Berhasil Dihapus');
     }
 
     public function edit(Book $book){
-        return view('book.edit', [
+        return view('dashboard.book.edit', [
             'publisher' => publisher::all(),
             'book' => $book
         ]);
@@ -61,6 +61,6 @@ class BookController extends Controller
 
         Book::where('id', $book->id)
             ->update($validateData);
-        return redirect('/book/all')->with('succes', 'Data has been updated');
+        return redirect('/dashboard/book/all')->with('succes', 'Data has been updated');
     }
 }

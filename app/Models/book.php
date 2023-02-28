@@ -16,4 +16,20 @@ class book extends Model
     public function publisher(){
         return $this->belongsTo(Publisher::class);
     }
+
+    public function scopeFilter($query, array $filters){
+        
+        if(isset ($filters['search']) ? $filters['search'] : false){
+            return$query->where('judul', 'like', '%' . $filters['search'] . '%')
+                    ->orWhere('pengarang', 'like', '%' . $filters['search'] . '%')
+                    ->orWhere('harga', 'like', '%' . $filters['search'] . '%');
+        }
+
+        $query->when($filters['category']??false, function($query, $category){
+            return $query->whereHas('publisher', function($query) use ($category){
+                $query->where('id', $category);
+            });
+        });
+    }
 }
+

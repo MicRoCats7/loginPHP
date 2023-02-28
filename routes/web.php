@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Models\publisher;
 use App\Http\Controllers\publisherController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
@@ -13,7 +14,9 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function(){
-    return view('home');
+    return view('home',[
+        'books' => Book::paginate(5)
+    ]);
 });
 
 Route::get('/about', function () {
@@ -44,4 +47,20 @@ Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'login_action'])->name('login.action');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::group(["prefix"  => "/dashboard" ], function(){
+    Route::get('/', function () {
+        return view('dashboard.index');
+    })->middleware('auth');
+
+    Route::group(["prefix" => "/book"], function(){
+        Route::get('/all', [DashboardController::class, 'index'])->middleware('auth');
+        Route::get('detail/{book:Judul}', [DashboardController::class, 'show'])->middleware('auth');
+        Route::get('/create', [DashboardController::class, 'create'])->middleware('auth');
+        Route::post('/add', [DashboardController::class, 'store'])->middleware('auth');
+        Route::delete('/delete/{book}', [DashboardController::class, 'destroy'])->middleware('auth');
+        Route::get('/edit/{book}', [DashboardController::class, 'edit'])->middleware('auth');
+        Route::post('/update/{book}', [DashboardController::class, 'update'])->middleware('auth');
+    });
+});
 

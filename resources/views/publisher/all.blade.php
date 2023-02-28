@@ -2,9 +2,9 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 align="center">List Publisher</h1>
+<h1 align="center" style="margin-top:160px">List Publisher</h1>
 {{-- looping book to table --}}
-<table class="table table-success table-striped">
+<table class="table table-success table-striped" style="margin-top: 100px">
     <thead>
     <tr>
         <th scope="col">No</th>
@@ -25,7 +25,7 @@
         <td>
             @foreach ($publisher->book as $book)
                 <ul>
-                    <li>{{ $book->judul}}</li>
+                    <li class="text-dark">{{ $book->judul}}</li>
                 </ul>
             @endforeach
         </td>

@@ -1,0 +1,84 @@
+.hero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-right img{
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+}
+
+.book{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-book{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.book img{
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+    aspect-ratio: 1/1;   
+}
+
+.book-right{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.footer-title{
+    padding: 50px;
+}
+
+.footer-title h1{
+    font-size: 16px;
+    font-weight: 600;
+    color: #0B132B;
+}
+
+.card{
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.soMore{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: #CAF0F8;
+    width: 22%;
+    border-radius: 20px;
+}
+
+.soMore a{
+    text-decoration: none;
+    color: #0B132B;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+}
